@@ -135,3 +135,60 @@ def lendle_supply_usdc():
     print("Supply confirmado:", receipt.transactionHash.hex())
 
     return "Supply exitoso"
+
+def getHealtFactor(user_address):
+    # Conexión a Mantle Mainnet
+    w3 = Web3(Web3.HTTPProvider('https://rpc.mantle.xyz'))
+    assert w3.is_connected(), "No se pudo conectar a Mantle"
+
+    addreUser = Web3.to_checksum_address(user_address)  # Lendle LendingPool
+    contract_address     = Web3.to_checksum_address('0xCFa5aE7c2CE8Fadc6426C1ff872cA45378Fb7cF3')  # Lendle LendingPool
+    infoUser_pool_abi = json.loads('''
+    [
+        {
+            "inputs": [
+                {
+                    "internalType": "address",
+                    "name": "user",
+                    "type": "address"
+                }
+            ],
+            "name": "getUserAccountData",
+            "outputs": [
+                { "internalType": "uint256", "name": "totalCollateralETH", "type": "uint256" },
+                { "internalType": "uint256", "name": "totalDebtETH", "type": "uint256" },
+                { "internalType": "uint256", "name": "availableBorrowsETH", "type": "uint256" },
+                { "internalType": "uint256", "name": "currentLiquidationThreshold", "type": "uint256" },
+                { "internalType": "uint256", "name": "ltv", "type": "uint256" },
+                { "internalType": "uint256", "name": "healthFactor", "type": "uint256" }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ]
+                                   ''')
+    # Crear la instancia del contrato
+    contract = w3.eth.contract(address=contract_address, abi=infoUser_pool_abi)
+    user_address = Web3.to_checksum_address(addreUser)
+
+    # Llamar a la función
+    data = contract.functions.getUserAccountData(user_address).call()
+
+    # Imprimir los resultados
+    (
+        totalCollateralETH,
+        totalDebtETH,
+        availableBorrowsETH,
+        currentLiquidationThreshold,
+        ltv,
+        healthFactor
+    ) = data
+
+    #print("Total Collateral (ETH):", Web3.from_wei(totalCollateralETH, 'ether'))
+    #print("Total Debt (ETH):", Web3.from_wei(totalDebtETH, 'ether'))
+    #print("Available Borrows (ETH):", Web3.from_wei(availableBorrowsETH, 'ether'))
+    #print("Current Liquidation Threshold:", currentLiquidationThreshold)
+    #print("LTV:", ltv)
+    #print("Health Factor:", healthFactor / (10 ** 18))  # Normalmente healthFactor está en 18 decimales
+
+    return healthFactor / (10 ** 18)

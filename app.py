@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from watcher import iniciar_watcher, get_ultimo_estado
 from supplycUSD import supplyCusd
-from lendlesupplyUSDC import lendle_supply_usdc
+from lendlesupplyUSDC import lendle_supply_usdc,getHealtFactor
 from widthDrawAave import widthDrawUSD
 
 app = Flask(__name__)
@@ -10,6 +10,10 @@ iniciar_watcher()  # Inicia el scheduler
 @app.route('/')
 def index():
     return "HealthWatcher corriendo!"
+
+@app.route('/getHealtFactor/<string:userWallet>', methods=['GET'])
+def getHealtFactorUser(userWallet):
+    return jsonify(getHealtFactor(userWallet))
 
 @app.route('/estado', methods=['GET'])
 def estado():
