@@ -18,7 +18,7 @@ Con esta herramienta, los usuarios pueden **evitar pérdidas innecesarias**, man
 - `Lendle.xyz`: protocolo DeFi utilizado para préstamos y colateral
 - `Telegram Bot API` / `Discord Webhooks`: para notificaciones en tiempo real con Eliza OS
 
-## 🚀 Configuración de Wallet
+## ⚙️ Configuración de Wallet
 - En el archivo .env configurar wallet y llave privada de la que se realizaran las consultas de Healt Factor y la creción de Supply
 
 ```bash
