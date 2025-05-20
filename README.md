@@ -18,9 +18,20 @@ Con esta herramienta, los usuarios pueden **evitar pérdidas innecesarias**, man
 - `Lendle.xyz`: protocolo DeFi utilizado para préstamos y colateral
 - `Telegram Bot API` / `Discord Webhooks`: para notificaciones en tiempo real con Eliza OS
 
+## 🚀 Configuración de Wallet
+- En el archivo .env configurar wallet y llave privada de la que se realizaran las consultas de Healt Factor y la creción de Supply
+
+```bash
+   PRIVATE_KEY=0xPRIVATEKEY
+   ADDRESS=0xPUBLICKEY
+
+
 ## 🚀 Cómo ejecutarlo
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/tuusuario/protector-lendle.git
-   cd protector-lendle
+   git clone https://github.com/SergioFinix/DARVS_RISK_RADAR.git
+   cd DARVS_RISK_RADAR
+   pip install -r requirements.txt
+   python \app.py
+
