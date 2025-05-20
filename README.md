@@ -24,7 +24,7 @@ Con esta herramienta, los usuarios pueden **evitar pérdidas innecesarias**, man
 ```bash
    PRIVATE_KEY=0xPRIVATEKEY
    ADDRESS=0xPUBLICKEY
-
+```
 
 ## 🚀 Cómo ejecutarlo
 
@@ -34,4 +34,5 @@ Con esta herramienta, los usuarios pueden **evitar pérdidas innecesarias**, man
    cd DARVS_RISK_RADAR
    pip install -r requirements.txt
    python \app.py
+   ```
 
